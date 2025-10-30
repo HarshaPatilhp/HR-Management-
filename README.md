@@ -14,23 +14,4 @@ A comprehensive, full-featured HR Management Portal with modern UI/UX, complete 
 - ⚙️ **Settings & Security**
 - 🔔 **Browser Notifications**
 
-## Tech Stack
-
-- React 18
-- Tailwind CSS
-- Lucide React Icons
-
-## Installation
-
-```bash
-npm install
-npm start
-```
-
-## Demo Accounts
-
-- **Admin**: admin@company.com / admin123
-- **HR**: hr@company.com / hr1234
-- **Employee**: john@company.com / john123
-
 ## Made with ❤️ by Respondr
