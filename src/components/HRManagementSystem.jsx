@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, Clock, Calendar, MessageSquare, Settings, LogOut, CheckCircle, XCircle, AlertCircle, Search, Send, Camera, Upload, UserPlus, Trash2, Eye, EyeOff, Bell, X } from 'lucide-react';
+import { Users, Clock, Calendar, MessageSquare, Settings, LogOut, CheckCircle, AlertCircle, Search, Send, Camera, Upload, UserPlus, Trash2, Eye, EyeOff, Bell, X } from 'lucide-react';
 import { authAPI, employeeAPI, attendanceAPI, leaveAPI, messageAPI } from '../services/api';
 
 const HRManagementSystem = () => {
@@ -11,7 +11,7 @@ const HRManagementSystem = () => {
   const [lockoutTime, setLockoutTime] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
-  const [showNotificationsPanel, setShowNotificationsPanel] = useState(false);
+  // Removed unused state: showNotificationsPanel
   const [hrClockedIn, setHrClockedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState([]);
@@ -46,7 +46,7 @@ const HRManagementSystem = () => {
   const [workCompletionNotifications, setWorkCompletionNotifications] = useState([]);
   const [attendanceFilter, setAttendanceFilter] = useState('all'); // 'all', 'active', 'completed'
   const [leaveFilter, setLeaveFilter] = useState('all'); // 'all', 'pending', 'approved', 'rejected'
-  const [showEmployeeList, setShowEmployeeList] = useState(false);
+  // Removed unused state: showEmployeeList
   const [showDOBModal, setShowDOBModal] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [dobError, setDobError] = useState('');
@@ -77,7 +77,7 @@ const HRManagementSystem = () => {
 
   useEffect(() => {
     if (selectedContact) markMessagesAsRead(selectedContact.id);
-  }, [selectedContact]);
+  }, [selectedContact, markMessagesAsRead]);
 
   // Fetch employees when user logs in
   useEffect(() => {
@@ -315,12 +315,11 @@ const HRManagementSystem = () => {
       };
       
       console.log('Starting work with data:', attendanceData);
-      const response = await attendanceAPI.startWork(attendanceData);
-      console.log('Start work response:', response);
+      const { data } = await attendanceAPI.startWork(attendanceData);
       
       const newAttendance = {
-        ...response.attendance,
-        id: response.attendance._id || response.attendance.id,
+        ...data.attendance,
+        id: data.attendance._id || data.attendance.id,
         startTimestamp: startTimestamp // Ensure timestamp is set
       };
       
@@ -594,7 +593,7 @@ const HRManagementSystem = () => {
     
     try {
       // Update profile picture in backend
-      const response = await employeeAPI.update(currentUser.id, {
+      await employeeAPI.update(currentUser.id, {
         ...currentUser,
         profilePic: newProfilePic
       });
