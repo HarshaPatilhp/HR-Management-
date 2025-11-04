@@ -8,6 +8,7 @@ node_modules/
 
 # production
 /build
+frontend/build
 
 # misc
 .DS_Store
@@ -21,6 +22,11 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# frontend
+frontend/node_modules/
+frontend/.env
+frontend/build/
 
 # backend
 backend/node_modules/

@@ -107,9 +107,19 @@ git clone https://github.com/HarshaPatilhp/HR-Management-.git
 cd HR-Management-
 ```
 
-2. **Install dependencies**
+2. **Install all dependencies**
 ```bash
+# Install root dependencies and both frontend & backend
+npm run install-all
+```
+
+**OR install manually:**
+```bash
+# Root
+npm install
+
 # Frontend
+cd frontend
 npm install
 
 # Backend
@@ -128,13 +138,19 @@ cd backend
 npm run seed
 ```
 
-5. **Start the servers**
+5. **Start both servers together**
 ```bash
-# Backend (from backend folder)
-npm run dev
-
-# Frontend (from root folder)
+# From root folder - starts both frontend and backend
 npm start
+```
+
+**OR start separately:**
+```bash
+# Backend (Terminal 1)
+npm run backend
+
+# Frontend (Terminal 2)
+npm run frontend
 ```
 
 6. **Access the application**
@@ -161,16 +177,24 @@ After seeding, use these credentials:
 
 ```
 hr-management-system/
-├── backend/
-│   ├── models/           # Mongoose schemas
-│   ├── routes/           # Express routes
-│   ├── scripts/          # Utility scripts
-│   └── server.js         # Express server
-├── src/
-│   ├── components/       # React components
-│   └── services/         # API services
-├── public/               # Static assets
-└── Documentation/        # Guides and docs
+├── frontend/                    # React frontend application
+│   ├── src/
+│   │   ├── components/         # React components
+│   │   └── services/           # API services
+│   ├── public/                 # Static assets
+│   ├── package.json            # Frontend dependencies
+│   └── tailwind.config.js      # Tailwind CSS config
+│
+├── backend/                     # Express backend API
+│   ├── models/                 # Mongoose schemas
+│   ├── routes/                 # Express routes
+│   ├── scripts/                # Utility scripts
+│   ├── server.js               # Express server
+│   └── package.json            # Backend dependencies
+│
+├── Documentation/               # Project documentation (*.md files)
+├── package.json                # Root package with scripts
+└── README.md                   # This file
 ```
 
 ---
@@ -207,8 +231,18 @@ hr-management-system/
 
 ## 🔧 Available Scripts
 
-### Backend Scripts
+### Root Scripts (from project root)
 ```bash
+npm start            # Start both frontend & backend concurrently
+npm run install-all  # Install all dependencies (root, frontend, backend)
+npm run frontend     # Start frontend only (port 3001)
+npm run backend      # Start backend only (port 5000)
+npm run build        # Build frontend for production
+```
+
+### Backend Scripts (from backend folder)
+```bash
+cd backend
 npm run dev          # Start backend with nodemon
 npm run seed         # Seed database with default users
 npm run show-credentials  # Display all user credentials
