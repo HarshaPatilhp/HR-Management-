@@ -104,6 +104,16 @@ export const attendanceAPI = {
     const response = await api.put(`/attendance/${id}/complete`, data);
     return response.data;
   },
+  
+  deleteRecord: async (id) => {
+    const response = await api.delete(`/attendance/${id}`);
+    return response.data;
+  },
+  
+  deleteHistory: async () => {
+    const response = await api.delete('/attendance/history');
+    return response.data;
+  },
 };
 
 // Leave API
@@ -146,6 +156,24 @@ export const messageAPI = {
   
   markAsRead: async (id) => {
     const response = await api.put(`/messages/${id}/read`);
+    return response.data;
+  },
+  
+  markAsReadBatch: async (messageIds) => {
+    const response = await api.put('/messages/mark-read-batch', { messageIds });
+    return response.data;
+  },
+};
+
+// Settings API
+export const settingsAPI = {
+  get: async () => {
+    const response = await api.get('/settings');
+    return response.data;
+  },
+  
+  update: async (data) => {
+    const response = await api.put('/settings', data);
     return response.data;
   },
 };
